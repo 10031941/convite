@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quer sair comigo? 😏</title>
+
+<style>
+body {
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:#ffe8ef;
+  font-family: Arial;
+}
+
+/* CARD */
+.card {
+  text-align:center;
+}
+
+video {
+  width:260px;
+}
+
+/* BOTÕES */
+.buttons {
+  margin-top:20px;
+}
+
+button {
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#yes { background:#ff4f8b; color:white; }
+#no { background:white; }
+
+/* LOADING */
+#loading {
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#ffe8ef;
+  justify-content:center;
+  align-items:center;
+}
+
+/* CORAÇÃO */
+.loader {
+  width:80px;
+  height:80px;
+  background:#ff4f8b;
+  transform:rotate(45deg);
+  animation:pulse 1s infinite;
+  position:relative;
+}
+
+.loader:before,
+.loader:after {
+  content:"";
+  width:80px;
+  height:80px;
+  background:#ff4f8b;
+  border-radius:50%;
+  position:absolute;
+}
+
+.loader:before { top:-40px; left:0; }
+.loader:after { left:-40px; top:0; }
+
+@keyframes pulse {
+  0% { transform: scale(1) rotate(45deg); }
+  50% { transform: scale(1.2) rotate(45deg); }
+  100% { transform: scale(1) rotate(45deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <video src="inicio.gif.mp4" autoplay loop muted></video>
+
+  <h2>Quer sair comigo? 😏</h2>
+
+  <div class="buttons">
+    <button id="yes">Sim 💕</button>
+    <button id="no">Não 🙈</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading">
+  <div class="loader"></div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+/* NÃO TELEPORTA */
+noBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+/* SIM */
+yesBtn.addEventListener("click", () => {
+
+  document.querySelector(".card").style.display = "none";
+
+  const loading = document.getElementById("loading");
+  loading.style.display = "flex";
+
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        height:100vh;
+        background:#ffe8ef;
+        text-align:center;
+      ">
+        <video src="final.gif.mp4" autoplay loop muted style="width:320px;"></video>
+
+        <h1 style="
+          margin-top:20px;
+          color:#b2185b;
+          font-size:26px;
+        ">
+          Agora não tem mais volta… você já é meu 😏💖
+        </h1>
+      </div>
+    `;
+  }, 1800);
+});
+</script>
+
+</body>
+</html>
